@@ -1,67 +1,52 @@
 <template>
  <div><img class="w-screen" src="../assets/MusiccardsProjectWallpaper.png"></div>
 
-  <div  class="flex flex-wrap justify-center">
-      <div v-for="music in musicData" :key="music.id">
-        <base-musiccard>
-          <template v-slot:video>
-          <div>
-            <iframe
-              width="340"
-              height="250"
-              :src=  "music.src"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-          </template>
-
-          <template v-slot:musicname>  
-            <p style="font-family: 'Roboto', sans-serif;" class="pl-4 py-0.5 font-extrabold text-xl">{{ music.name }}</p>
-          </template>
-
-          <template v-slot:description>
-            <p>Music Card ID : {{ music.id }}</p>
-            <p>Artist : {{ music.artist}}</p>
-            <p>
-              Link :
-              <a
-                class="link"
-                :href="music.url"
-                target="_blank"
-                >{{ music.url }}</a
-              >
-            </p>
-          </template>
-          
-          <template v-slot:icon>
-            <span class="material-icons text-4xl cursor-pointer">favorite_border</span>
-            <span class="material-icons text-4xl cursor-pointer">playlist_add</span>
-            <span class="material-icons text-4xl cursor-pointer">edit</span>
-            <span class="material-icons text-4xl cursor-pointer">delete</span>
-          </template>
-        </base-musiccard>
-      </div>
-  </div>
+  <base-searchbar :music="musicData" @search-text='searchText' @search-option='changeSearchOption'></base-searchbar>
+  
+  <add-musiccard :addingState="addingState" @adding-state='changeAddingState' @adding-musiccard='addMusicCard'></add-musiccard>
+  
+  <music-cards :searchMusic="searchMusic" :notFound="notFound" @adding-state='changeAddingState'></music-cards>
+ 
 </template>
 
 <script>
+import MusicCards from '../components/MusicCards.vue';
 
 export default {
   name: 'Home',
+  props:{},
   components: {
+    MusicCards
     
   },
 
   data() {
     return {
       url: 'http://localhost:3000/musicData',
-      musicData:[]
+      musicData:[],
+      inputSearch: "",
+      notFound: false,
+      searchOption: "name",
+      addingState: false
     }
   },
   methods: {
+
+    searchText(searchText) {
+      this.inputSearch = searchText;
+    },
+
+    changeNotFound(boolean) {
+      this.notFound = boolean;
+    },
+
+    changeSearchOption(option) {
+      this.searchOption = option;
+    },
+
+    changeAddingState(boolean) {
+        this.addingState = boolean
+      },
 
     async getMusicData(){
       try{
@@ -74,7 +59,65 @@ export default {
       }
     },
 
-    
+    async addMusicCard(newCard){
+      try{
+      let i;
+      
+      for (i = 0; i < this.musicData.length; i++) {
+        if (newCard.src == this.musicData[i].shortSrc){
+          alert("Sorry, This music already exists.")
+          var isDuplicate = true;
+        }
+      }
+      if (isDuplicate != true){
+      const res = await fetch(this.url,{
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: this.musicData.length + 1,
+          name: newCard.name,
+          artist: newCard.artist,
+          shortSrc: newCard.src,
+          url: "https://youtu.be/" + newCard.src,
+          src: "https://www.youtube-nocookie.com/embed/" + newCard.src
+        })
+      })
+      const data = await res.json()
+      this.musicData = [...this.musicData, data]
+      alert("Add card succeed !")
+      }
+      }
+      catch(error){
+        console.log(`Could not save! ${error}`)
+      }
+    }
+
+  },
+  computed: {
+    searchMusic() {
+      this.changeNotFound(false);
+        if (this.inputSearch == "") {
+          return this.musicData.slice();
+        } else if (this.searchOption == "name" && this.inputSearch != ""){
+            let searching = this.musicData.filter((m) => 
+            m.name.toLowerCase().includes(this.inputSearch.toLowerCase()));
+            if (searching == "") {
+              this.changeNotFound(true);
+            }
+            return searching;
+        } else if (this.searchOption == "artist" && this.inputSearch != ""){
+            let searching = this.musicData.filter((m) => 
+            m.artist.toLowerCase().includes(this.inputSearch.toLowerCase()));
+            if (searching == "") {
+              this.changeNotFound(true);
+            }
+            return searching;
+        } else {
+          return "Error";
+        }
+    },
   },
   async created(){
       this.musicData = await this.getMusicData();

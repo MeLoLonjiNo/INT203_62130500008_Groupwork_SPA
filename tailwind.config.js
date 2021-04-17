@@ -18,7 +18,8 @@ module.exports = {
       },
       spacing: {
         'cardw': '382px',
-        'cardh': '573px'
+        'cardh': '573px',
+        'center': '50%'
       }
     }
   },

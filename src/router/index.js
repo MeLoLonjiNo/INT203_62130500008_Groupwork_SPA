@@ -26,6 +26,7 @@ const routes = [
     name: 'Decks',
     component: () => import('../views/Decks.vue')
   },
+  
 ]
 
 const router = createRouter({
