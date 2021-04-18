@@ -1,11 +1,31 @@
 <template>
  <div><img class="w-screen" src="../assets/MusiccardsProjectWallpaper.png"></div>
-
-  <base-searchbar :music="musicData" @search-text='searchText' @search-option='changeSearchOption'></base-searchbar>
+<div id="editZone"></div>
+  <base-searchbar 
+  :music="musicData" 
+  @search-text='searchText' 
+  @search-option='changeSearchOption'>
+  </base-searchbar>
   
-  <add-musiccard :addingState="addingState" @adding-state='changeAddingState' @adding-musiccard='addMusicCard'></add-musiccard>
+  <add-musiccard 
+  :addingState="addingState"
+  :editingState="editingState"
+  :editingCard="editingCard"
+  @adding-state='changeAddingState' 
+  @adding-musiccard='addMusicCard'
+  @editing-state='changeEditingState'
+  @editing-musiccard='editMusicCard'>
+  </add-musiccard>
   
-  <music-cards :searchMusic="searchMusic" :notFound="notFound" @adding-state='changeAddingState'></music-cards>
+  <music-cards 
+  :searchMusic="searchMusic" 
+  :notFound="notFound"
+  
+  @adding-state='changeAddingState' 
+  @delete-musiccard='deleteMusicCard'
+  @edit-state='changeEditingState'
+  @jump-editzone='jumpToEditZone'>
+  </music-cards>
  
 </template>
 
@@ -27,7 +47,9 @@ export default {
       inputSearch: "",
       notFound: false,
       searchOption: "name",
-      addingState: false
+      addingState: false,
+      editingState: false,
+      editingCard: null
     }
   },
   methods: {
@@ -45,7 +67,14 @@ export default {
     },
 
     changeAddingState(boolean) {
+        if(boolean == true){this.changeEditingState(false,null)}
         this.addingState = boolean
+      },
+
+    changeEditingState(boolean,editCard) {
+      if(boolean == true){this.changeAddingState(false)}
+        this.editingState = boolean
+        this.editingCard = editCard
       },
 
     async getMusicData(){
@@ -92,6 +121,58 @@ export default {
       catch(error){
         console.log(`Could not save! ${error}`)
       }
+    },
+    async deleteMusicCard(cardId){
+      try{
+        await fetch(`${this.url}/${cardId}`,{
+          method: 'DELETE'
+        })
+        this.musicData = this.musicData.filter(card=>card.id !== cardId)
+      }
+      catch(error){
+        console.log(`Could not delete! ${error}`)
+      }
+    },
+    async editMusicCard(editingCard){
+      try{
+        const res = await fetch(`${this.url}/${editingCard.id}`,{
+          method: 'PUT',
+          headers:{
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: editingCard.id,
+            name: editingCard.name,
+            artist: editingCard.artist,
+            shortSrc: editingCard.src,
+            url: "https://youtu.be/" + editingCard.src,
+            src: "https://www.youtube-nocookie.com/embed/" + editingCard.src
+          })
+        })
+        const data = await res.json()
+        this.musicData = this.musicData.map(card => 
+        card.id === editingCard.id ?
+        {...card,
+                  name: data.name, 
+                  artist: data.artist, 
+                  shortSrc: data.shortSrc, 
+                  url: data.url,
+                  src: data.src} : card)
+        alert("Your Editing has been complete !")
+        console.log(data)
+        this.editingState = false
+        this.editingCard = null
+        // this.editId = ''
+        // this.enteredName = ''
+        // this.rating = ''
+      }
+      catch(error){
+        console.log(`Could not edit! ${error}`)
+      }
+    },
+    jumpToEditZone(){
+      var go = document.getElementById("editZone");
+      go.scrollIntoView();
     }
 
   },

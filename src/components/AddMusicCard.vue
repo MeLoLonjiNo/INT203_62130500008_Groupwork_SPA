@@ -1,13 +1,14 @@
-<template>
-<div v-if="addingState==true">
-    
-    <div class="grid justify-items-center bg-gray-800 text-white py-6">
+<template >
+<div v-if="addingState==true || editingState==true" >
+    <div  class="grid justify-items-center bg-gray-800 text-white py-6">
         <form @submit.prevent="submitForm">
-        <div class="flex flex-col space-y-4 justify-center">
-        <p class="text-4xl font-bold">Add a music card</p>
+        <div class="flex flex-col space-y-3 justify-center">
+            <p v-if="addingState==true" class="text-4xl font-bold text-center">Add a music card</p>
+            <p v-if="editingState==true" class="text-4xl font-bold text-center">Edit a card ID {{editingCard.id}}</p>
+        <p v-if="editingState==true" class="font-semibold text-gray-200 pt-4">Old Music Name : {{editingCard.name}}</p>
         <div>
             <label class="label" for="name">Music Name : </label>
-            <input
+            <input v-on:click="showName"
                 class="input w-full text-black"
                 :class="{ 'bg-red-50': invalidNameInput }"
                 id="name"
@@ -19,9 +20,10 @@
                 Please enter music name!
             </p>
         </div>
+        <p v-if="editingState==true" class="font-semibold text-gray-200 pt-4">Old Artist Name : {{editingCard.artist}}</p>
         <div>
             <label class="label" for="artist">Artist Name : </label>
-            <input
+            <input v-on:click="showArtist"
                 class="input w-full text-black"
                 :class="{ 'bg-red-50': invalidArtistInput }"
                 id="artist"
@@ -33,9 +35,10 @@
                 Please enter artist name!
             </p>
         </div>
+        <p v-if="editingState==true" class="font-semibold text-gray-200 pt-4">Old Music Source Code : {{editingCard.shortSrc}}</p>
         <div>
             <label class="label" for="src">Source Code : </label>
-            <input
+            <input v-on:click="showSrc"
                 class="input w-full text-black"
                 :class="{ 'bg-red-50': invalidSrcInput }"
                 id="src"
@@ -50,7 +53,7 @@
         <div class="flex justify-center space-x-8">
         <base-button class="w-1/3 bg-green-500 hover:bg-green-600"> Submit </base-button>
         <base-button v-on:click="clearData" class="w-1/3 bg-gray-400 hover:bg-gray-600"> Clear </base-button>
-        <base-button v-on:click="closeAddingState" class="w-1/3 bg-red-500 hover:bg-red-600"> Close </base-button>
+        <base-button v-on:click="closeForm" class="w-1/3 bg-red-500 hover:bg-red-600"> Close </base-button>
         </div>
         
         </div>
@@ -63,7 +66,9 @@
 export default {
   name: 'Home',
   props:{
-        addingState: Boolean
+        addingState: Boolean,
+        editingState: Boolean,
+        editingCard: Object
         },
   components: {
     
@@ -99,17 +104,38 @@ export default {
         this.invalidNameInput = false,
         this.invalidArtistInput = false,
         this.invalidSrcInput = false
+
     },
-    closeAddingState(){
+    
+    closeForm(){
         this.clearData()
         this.$emit('adding-state', false);
+        this.$emit('editing-state',(false,null));
+        // console.log(this.addingState,this.editingState,this.editingCard)
     },
     submitForm() {
       if(this.enteredName !== '' && this.enteredArtist !== '' && this.enteredSrc != ''){
-        this.$emit('adding-musiccard', ({name:this.enteredName,artist:this.enteredArtist,src:this.enteredSrc}))
-        this.closeAddingState
+          if(this.editingState == true){
+              console.log(this.editingCard.id,this.enteredName,this.enteredArtist,this.enteredSrc)
+              this.$emit('editing-musiccard', 
+              ({id:this.editingCard.id,name:this.enteredName,artist:this.enteredArtist,src:this.enteredSrc}))
+          } else {
+              this.$emit('adding-musiccard', 
+              ({name:this.enteredName,artist:this.enteredArtist,src:this.enteredSrc}))
+          }
+        // this.closeForm()
+        this.clearData()
       }
     },
+    showName(){
+            this.enteredName = this.editingCard.name
     },
+    showArtist(){
+            this.enteredArtist = this.editingCard.artist
+    },
+    showSrc(){
+            this.enteredSrc = this.editingCard.shortSrc
+    }
+    }
 }
 </script>

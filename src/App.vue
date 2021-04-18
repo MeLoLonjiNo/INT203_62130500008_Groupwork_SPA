@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="flex space-x-12 justify-center">
+  <div id="nav" class="flex space-x-16 justify-center text-lg">
     <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link>
     <router-link to="/Favorites">Favorites</router-link>

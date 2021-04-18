@@ -136,6 +136,26 @@
       "url": "https://youtu.be/Cgt74TruI2c",
       "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c"
     }
+  ],
+  "favoritesMusic": [
+    {
+      "id": 7,
+      "name": "เดาไม่เก่ง",
+      "artist": "Three Man Down",
+      "shortSrc": "-aG0B5NwOuw",
+      "url": "https://youtu.be/-aG0B5NwOuw",
+      "src": "https://www.youtube-nocookie.com/embed/-aG0B5NwOuw"
+    },
+    {
+      "id": 17,
+      "name": "Haters Got Nothing",
+      "artist": "TRINITY",
+      "shortSrc": "Cgt74TruI2c",
+      "url": "https://youtu.be/Cgt74TruI2c",
+      "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c"
+    }
+  ],
+  "Deck": [
     
   ]
 }

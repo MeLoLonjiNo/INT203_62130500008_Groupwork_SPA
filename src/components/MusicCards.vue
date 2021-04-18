@@ -57,8 +57,8 @@
           <template v-slot:icon>
             <span class="material-icons text-4xl cursor-pointer">favorite_border</span>
             <span class="material-icons text-4xl cursor-pointer">playlist_add</span>
-            <span class="material-icons text-4xl cursor-pointer">edit</span>
-            <span class="material-icons text-4xl cursor-pointer">delete</span>
+            <span @click="editCard(music)" class="material-icons text-4xl cursor-pointer">edit</span>
+            <span @click="deleteCard(music.id)" class="material-icons text-4xl cursor-pointer">delete</span>
           </template>
         </base-musiccard>
       </div>
@@ -74,8 +74,8 @@ export default {
             type: Array,
             require: true
         },
-        notFound: Boolean
-
+        notFound: Boolean,
+        
     },
   components: {
     
@@ -88,10 +88,17 @@ export default {
   },
   methods: {
       addingState(){
-        this.isAddingState = true
-        this.$emit('adding-state', this.isAddingState);
-    },
-      
-}
+        this.$emit('adding-state', true);
+        this.$emit('jump-editzone')
+      },
+      deleteCard(cardID) {
+        this.$emit('delete-musiccard', cardID)
+      },
+      editCard(card) {
+        this.$emit('edit-state',true,card)
+        this.$emit('jump-editzone')
+      }
+    }
+
 }
 </script>
