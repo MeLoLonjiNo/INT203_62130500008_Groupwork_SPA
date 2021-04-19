@@ -24,7 +24,8 @@
   @adding-state='changeAddingState' 
   @delete-musiccard='deleteMusicCard'
   @edit-state='changeEditingState'
-  @jump-editzone='jumpToEditZone'>
+  @jump-editzone='jumpToEditZone'
+  @favorite-card='clickFavorite'>
   </music-cards>
  
 </template>
@@ -43,7 +44,9 @@ export default {
   data() {
     return {
       url: 'http://localhost:3000/musicData',
+      FavoritesUrl: 'http://localhost:3000/favoritesMusic',
       musicData:[],
+      favoritesMusic:[],
       inputSearch: "",
       notFound: false,
       searchOption: "name",
@@ -77,9 +80,9 @@ export default {
         this.editingCard = editCard
       },
 
-    async getMusicData(){
+    async getMusicData(url){
       try{
-      const res = await fetch(this.url)
+      const res = await fetch(url)
       const data = await res.json()
       return data
       }
@@ -88,10 +91,64 @@ export default {
       }
     },
 
+    clickFavorite(favoriteCard){
+      let i;
+      for (i = 0; i < this.favoritesMusic.length; i++) {
+        if (favoriteCard.src == this.favoritesMusic[i].shortSrc){
+          // alert("Sorry, This music already exists.")
+          var isDuplicate = true;
+        }
+      }
+      if (isDuplicate != true){
+        this.addFaverite(favoriteCard)
+      } else {
+        this.deleteFavorite(favoriteCard.id)
+      }
+    },
+
+    async addFaverite(favoriteCard){
+      try{
+      
+      const res = await fetch(this.FavoritesUrl,{
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: favoriteCard.id,
+          name: favoriteCard.name,
+          artist: favoriteCard.artist,
+          shortSrc: favoriteCard.shortSrc,
+          url: favoriteCard.url,
+          src: favoriteCard.src
+        })
+      })
+      const data = await res.json()
+      this.favoritesMusic = [...this.favoritesMusic, data]
+      alert("Add this card to your favorites !")
+      }
+      
+      catch(error){
+        console.log(`Could not add! ${error}`)
+      }
+    },
+
+    async deleteFavorite(cardId){
+      try{
+        await fetch(`${this.FavoritesUrl}/${cardId}`,{
+          method: 'DELETE'
+        })
+        this.favoritesMusic = this.favoritesMusic.filter(card=>card.id !== cardId)
+        alert("Unfavorite Succeed !")
+      }
+      catch(error){
+        console.log(`Could not delete! ${error}`)
+      }
+    },
+
     async addMusicCard(newCard){
       try{
       let i;
-      
       for (i = 0; i < this.musicData.length; i++) {
         if (newCard.src == this.musicData[i].shortSrc){
           alert("Sorry, This music already exists.")
@@ -122,6 +179,7 @@ export default {
         console.log(`Could not save! ${error}`)
       }
     },
+
     async deleteMusicCard(cardId){
       try{
         await fetch(`${this.url}/${cardId}`,{
@@ -201,7 +259,8 @@ export default {
     },
   },
   async created(){
-      this.musicData = await this.getMusicData();
+      this.musicData = await this.getMusicData(this.url);
+      this.favoritesMusic = await this.getMusicData(this.FavoritesUrl);
     },
 }
 </script>

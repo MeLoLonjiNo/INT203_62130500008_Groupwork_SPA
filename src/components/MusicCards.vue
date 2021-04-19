@@ -55,7 +55,7 @@
           </template>
           
           <template v-slot:icon>
-            <span class="material-icons text-4xl cursor-pointer">favorite_border</span>
+            <span @click="favoritesCard(music)" class="material-icons text-4xl cursor-pointer">favorite_border</span>
             <span class="material-icons text-4xl cursor-pointer">playlist_add</span>
             <span @click="editCard(music)" class="material-icons text-4xl cursor-pointer">edit</span>
             <span @click="deleteCard(music.id)" class="material-icons text-4xl cursor-pointer">delete</span>
@@ -97,6 +97,9 @@ export default {
       editCard(card) {
         this.$emit('edit-state',true,card)
         this.$emit('jump-editzone')
+      },
+      favoritesCard(card) {
+        this.$emit('favorite-card',card)
       }
     }
 

@@ -135,6 +135,14 @@
       "shortSrc": "Cgt74TruI2c",
       "url": "https://youtu.be/Cgt74TruI2c",
       "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c"
+    },
+    {
+      "id": 18,
+      "name": "IOU",
+      "artist": "TRINITY",
+      "shortSrc": "kx5wGTKOzXw",
+      "url": "https://youtu.be/kx5wGTKOzXw",
+      "src": "https://www.youtube-nocookie.com/embed/kx5wGTKOzXw"
     }
   ],
   "favoritesMusic": [
@@ -153,9 +161,23 @@
       "shortSrc": "Cgt74TruI2c",
       "url": "https://youtu.be/Cgt74TruI2c",
       "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c"
+    },
+    {
+      "id": 1,
+      "name": "How Do You Sleep?",
+      "artist": "Sam Smith",
+      "shortSrc": "PmYypVozQb4",
+      "url": "https://youtu.be/PmYypVozQb4",
+      "src": "https://www.youtube-nocookie.com/embed/PmYypVozQb4"
+    },
+    {
+      "id": 18,
+      "name": "IOU",
+      "artist": "TRINITY",
+      "shortSrc": "kx5wGTKOzXw",
+      "url": "https://youtu.be/kx5wGTKOzXw",
+      "src": "https://www.youtube-nocookie.com/embed/kx5wGTKOzXw"
     }
   ],
-  "Deck": [
-    
-  ]
+  "Deck": []
 }
