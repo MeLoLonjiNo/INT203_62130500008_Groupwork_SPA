@@ -6,7 +6,8 @@
       "artist": "Sam Smith",
       "shortSrc": "PmYypVozQb4",
       "url": "https://youtu.be/PmYypVozQb4",
-      "src": "https://www.youtube-nocookie.com/embed/PmYypVozQb4"
+      "src": "https://www.youtube-nocookie.com/embed/PmYypVozQb4",
+      "favorite": false
     },
     {
       "id": 2,
@@ -14,7 +15,8 @@
       "artist": "Sam Smith",
       "shortSrc": "8RvAKRoIDqU",
       "url": "https://youtu.be/8RvAKRoIDqU",
-      "src": "https://www.youtube-nocookie.com/embed/8RvAKRoIDqU"
+      "src": "https://www.youtube-nocookie.com/embed/8RvAKRoIDqU",
+      "favorite": false
     },
     {
       "id": 3,
@@ -22,7 +24,8 @@
       "artist": "Sam Smith",
       "shortSrc": "J_ub7Etch2U",
       "url": "https://youtu.be/J_ub7Etch2U",
-      "src": "https://www.youtube-nocookie.com/embed/J_ub7Etch2U"
+      "src": "https://www.youtube-nocookie.com/embed/J_ub7Etch2U",
+      "favorite": false
     },
     {
       "id": 4,
@@ -30,7 +33,8 @@
       "artist": "Sam Smith",
       "shortSrc": "nCkpzqqog4k",
       "url": "https://youtu.be/nCkpzqqog4k",
-      "src": "https://www.youtube-nocookie.com/embed/nCkpzqqog4k"
+      "src": "https://www.youtube-nocookie.com/embed/nCkpzqqog4k",
+      "favorite": false
     },
     {
       "id": 5,
@@ -38,7 +42,8 @@
       "artist": "Sam Smith",
       "shortSrc": "HaMq2nn5ac0",
       "url": "https://youtu.be/HaMq2nn5ac0",
-      "src": "https://www.youtube-nocookie.com/embed/HaMq2nn5ac0"
+      "src": "https://www.youtube-nocookie.com/embed/HaMq2nn5ac0",
+      "favorite": false
     },
     {
       "id": 6,
@@ -46,7 +51,8 @@
       "artist": "Sam Smith",
       "shortSrc": "vk_xq1P7vIU",
       "url": "https://youtu.be/vk_xq1P7vIU",
-      "src": "https://www.youtube-nocookie.com/embed/vk_xq1P7vIU"
+      "src": "https://www.youtube-nocookie.com/embed/vk_xq1P7vIU",
+      "favorite": false
     },
     {
       "id": 7,
@@ -54,7 +60,8 @@
       "artist": "Three Man Down",
       "shortSrc": "-aG0B5NwOuw",
       "url": "https://youtu.be/-aG0B5NwOuw",
-      "src": "https://www.youtube-nocookie.com/embed/-aG0B5NwOuw"
+      "src": "https://www.youtube-nocookie.com/embed/-aG0B5NwOuw",
+      "favorite": false
     },
     {
       "id": 8,
@@ -62,7 +69,8 @@
       "artist": "Three Man Down",
       "shortSrc": "JBAuRoIRAs8",
       "url": "https://youtu.be/JBAuRoIRAs8",
-      "src": "https://www.youtube-nocookie.com/embed/JBAuRoIRAs8"
+      "src": "https://www.youtube-nocookie.com/embed/JBAuRoIRAs8",
+      "favorite": false
     },
     {
       "id": 9,
@@ -70,7 +78,8 @@
       "artist": "Three Man Down",
       "shortSrc": "3O_Hxdtoyac",
       "url": "https://youtu.be/3O_Hxdtoyac",
-      "src": "https://www.youtube-nocookie.com/embed/3O_Hxdtoyac"
+      "src": "https://www.youtube-nocookie.com/embed/3O_Hxdtoyac",
+      "favorite": false
     },
     {
       "id": 10,
@@ -78,7 +87,8 @@
       "artist": "Three Man Down",
       "shortSrc": "m9h12tuUqGo",
       "url": "https://youtu.be/m9h12tuUqGo",
-      "src": "https://www.youtube-nocookie.com/embed/m9h12tuUqGo"
+      "src": "https://www.youtube-nocookie.com/embed/m9h12tuUqGo",
+      "favorite": false
     },
     {
       "id": 11,
@@ -86,7 +96,8 @@
       "artist": "Three Man Down",
       "shortSrc": "k1nx95_btCI",
       "url": "https://youtu.be/k1nx95_btCI",
-      "src": "https://www.youtube-nocookie.com/embed/k1nx95_btCI"
+      "src": "https://www.youtube-nocookie.com/embed/k1nx95_btCI",
+      "favorite": false
     },
     {
       "id": 12,
@@ -94,7 +105,8 @@
       "artist": "Three Man Down",
       "shortSrc": "XCTWuut6Bjw",
       "url": "https://youtu.be/XCTWuut6Bjw",
-      "src": "https://www.youtube-nocookie.com/embed/XCTWuut6Bjw"
+      "src": "https://www.youtube-nocookie.com/embed/XCTWuut6Bjw",
+      "favorite": false
     },
     {
       "id": 13,
@@ -102,7 +114,8 @@
       "artist": "Three Man Down",
       "shortSrc": "ks7p6DA0dKk",
       "url": "https://youtu.be/ks7p6DA0dKk",
-      "src": "https://www.youtube-nocookie.com/embed/ks7p6DA0dKk"
+      "src": "https://www.youtube-nocookie.com/embed/ks7p6DA0dKk",
+      "favorite": false
     },
     {
       "id": 14,
@@ -110,7 +123,8 @@
       "artist": "Three Man Down",
       "shortSrc": "0nYXaAx51-g",
       "url": "https://youtu.be/0nYXaAx51-g",
-      "src": "https://www.youtube-nocookie.com/embed/0nYXaAx51-g"
+      "src": "https://www.youtube-nocookie.com/embed/0nYXaAx51-g",
+      "favorite": false
     },
     {
       "id": 15,
@@ -118,7 +132,17 @@
       "artist": "Three Man Down",
       "shortSrc": "6kmR8VdjBqI",
       "url": "https://youtu.be/6kmR8VdjBqI",
-      "src": "https://www.youtube-nocookie.com/embed/6kmR8VdjBqI"
+      "src": "https://www.youtube-nocookie.com/embed/6kmR8VdjBqI",
+      "favorite": false
+    },
+    {
+      "id": 18,
+      "name": "IOU",
+      "artist": "TRINITY",
+      "shortSrc": "kx5wGTKOzXw",
+      "url": "https://youtu.be/kx5wGTKOzXw",
+      "src": "https://www.youtube-nocookie.com/embed/kx5wGTKOzXw",
+      "favorite": true
     },
     {
       "id": 16,
@@ -126,7 +150,26 @@
       "artist": "Three Man Down",
       "shortSrc": "OGgUy3MPE30",
       "url": "https://youtu.be/OGgUy3MPE30",
-      "src": "https://www.youtube-nocookie.com/embed/OGgUy3MPE30"
+      "src": "https://www.youtube-nocookie.com/embed/OGgUy3MPE30",
+      "favorite": false
+    },
+    {
+      "id": 19,
+      "name": "Jazzy",
+      "artist": "TRINITY",
+      "shortSrc": "9pwSUrwHDNE",
+      "url": "https://youtu.be/9pwSUrwHDNE",
+      "src": "https://www.youtube-nocookie.com/embed/9pwSUrwHDNE",
+      "favorite": true
+    },
+    {
+      "id": 20,
+      "name": "HIDDEN TRACK",
+      "artist": "TRINITY",
+      "shortSrc": "AbEjhYLarSc",
+      "url": "https://youtu.be/AbEjhYLarSc",
+      "src": "https://www.youtube-nocookie.com/embed/AbEjhYLarSc",
+      "favorite": true
     },
     {
       "id": 17,
@@ -134,50 +177,8 @@
       "artist": "TRINITY",
       "shortSrc": "Cgt74TruI2c",
       "url": "https://youtu.be/Cgt74TruI2c",
-      "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c"
-    },
-    {
-      "id": 18,
-      "name": "IOU",
-      "artist": "TRINITY",
-      "shortSrc": "kx5wGTKOzXw",
-      "url": "https://youtu.be/kx5wGTKOzXw",
-      "src": "https://www.youtube-nocookie.com/embed/kx5wGTKOzXw"
+      "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c",
+      "favorite": true
     }
-  ],
-  "favoritesMusic": [
-    {
-      "id": 7,
-      "name": "เดาไม่เก่ง",
-      "artist": "Three Man Down",
-      "shortSrc": "-aG0B5NwOuw",
-      "url": "https://youtu.be/-aG0B5NwOuw",
-      "src": "https://www.youtube-nocookie.com/embed/-aG0B5NwOuw"
-    },
-    {
-      "id": 17,
-      "name": "Haters Got Nothing",
-      "artist": "TRINITY",
-      "shortSrc": "Cgt74TruI2c",
-      "url": "https://youtu.be/Cgt74TruI2c",
-      "src": "https://www.youtube-nocookie.com/embed/Cgt74TruI2c"
-    },
-    {
-      "id": 1,
-      "name": "How Do You Sleep?",
-      "artist": "Sam Smith",
-      "shortSrc": "PmYypVozQb4",
-      "url": "https://youtu.be/PmYypVozQb4",
-      "src": "https://www.youtube-nocookie.com/embed/PmYypVozQb4"
-    },
-    {
-      "id": 18,
-      "name": "IOU",
-      "artist": "TRINITY",
-      "shortSrc": "kx5wGTKOzXw",
-      "url": "https://youtu.be/kx5wGTKOzXw",
-      "src": "https://www.youtube-nocookie.com/embed/kx5wGTKOzXw"
-    }
-  ],
-  "Deck": []
+  ]
 }

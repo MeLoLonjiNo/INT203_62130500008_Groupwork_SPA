@@ -19,7 +19,11 @@ module.exports = {
       spacing: {
         'cardw': '382px',
         'cardh': '573px',
-        'center': '50%'
+        'center': '50%',
+        '17%': '17%',
+        'q': '27%',
+        'videowidth': '340px',
+        'videoheight': '250px'
       }
     }
   },

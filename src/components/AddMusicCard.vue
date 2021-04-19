@@ -116,25 +116,31 @@ export default {
     submitForm() {
       if(this.enteredName !== '' && this.enteredArtist !== '' && this.enteredSrc != ''){
           if(this.editingState == true){
-              console.log(this.editingCard.id,this.enteredName,this.enteredArtist,this.enteredSrc)
+            //   console.log({id:this.editingCard.id,name:this.enteredName,artist:this.enteredArtist,shortSrc:this.enteredSrc},this.editingCard.favorite)
               this.$emit('editing-musiccard', 
-              ({id:this.editingCard.id,name:this.enteredName,artist:this.enteredArtist,src:this.enteredSrc}))
+              ({id:this.editingCard.id,name:this.enteredName,artist:this.enteredArtist,shortSrc:this.enteredSrc}),this.editingCard.favorite)
           } else {
               this.$emit('adding-musiccard', 
-              ({name:this.enteredName,artist:this.enteredArtist,src:this.enteredSrc}))
+              ({name:this.enteredName,artist:this.enteredArtist,shortSrc:this.enteredSrc}))
           }
         // this.closeForm()
         this.clearData()
       }
     },
     showName(){
+        if (this.editingCard != null){
             this.enteredName = this.editingCard.name
+        } else { this.enteredName = ""}
     },
     showArtist(){
+        if (this.editingCard != null){
             this.enteredArtist = this.editingCard.artist
+        } else { this.enteredArtist = ""}
     },
     showSrc(){
+        if (this.editingCard != null){
             this.enteredSrc = this.editingCard.shortSrc
+        } else { this.enteredSrc = ""}
     }
     }
 }

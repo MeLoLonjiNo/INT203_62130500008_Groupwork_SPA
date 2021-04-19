@@ -3,8 +3,9 @@
     <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link>
     <router-link to="/Favorites">Favorites</router-link>
-    <router-link to="/Decks">Decks</router-link>
+    <!-- <router-link to="/Decks">Decks</router-link> -->
   </div>
+  
   <router-view/>
 </template>
 

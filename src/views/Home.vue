@@ -2,7 +2,7 @@
  <div><img class="w-screen" src="../assets/MusiccardsProjectWallpaper.png"></div>
 <div id="editZone"></div>
   <base-searchbar 
-  :music="musicData" 
+  
   @search-text='searchText' 
   @search-option='changeSearchOption'>
   </base-searchbar>
@@ -20,7 +20,7 @@
   <music-cards 
   :searchMusic="searchMusic" 
   :notFound="notFound"
-  
+  :addCardPrivilage="true"
   @adding-state='changeAddingState' 
   @delete-musiccard='deleteMusicCard'
   @edit-state='changeEditingState'
@@ -44,9 +44,7 @@ export default {
   data() {
     return {
       url: 'http://localhost:3000/musicData',
-      FavoritesUrl: 'http://localhost:3000/favoritesMusic',
       musicData:[],
-      favoritesMusic:[],
       inputSearch: "",
       notFound: false,
       searchOption: "name",
@@ -92,57 +90,52 @@ export default {
     },
 
     clickFavorite(favoriteCard){
-      let i;
-      for (i = 0; i < this.favoritesMusic.length; i++) {
-        if (favoriteCard.src == this.favoritesMusic[i].shortSrc){
-          // alert("Sorry, This music already exists.")
-          var isDuplicate = true;
-        }
-      }
-      if (isDuplicate != true){
-        this.addFaverite(favoriteCard)
+      if (favoriteCard.favorite == false){
+        this.editMusicCard(favoriteCard, true)
       } else {
-        this.deleteFavorite(favoriteCard.id)
+        this.editMusicCard(favoriteCard, false)
       }
     },
 
-    async addFaverite(favoriteCard){
+    async editMusicCard(editingCard,boolean){
+      // console.log(editingCard,boolean)
       try{
-      
-      const res = await fetch(this.FavoritesUrl,{
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: favoriteCard.id,
-          name: favoriteCard.name,
-          artist: favoriteCard.artist,
-          shortSrc: favoriteCard.shortSrc,
-          url: favoriteCard.url,
-          src: favoriteCard.src
+        const res = await fetch(`${this.url}/${editingCard.id}`,{
+          method: 'PUT',
+          headers:{
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: editingCard.id,
+            name: editingCard.name,
+            artist: editingCard.artist,
+            shortSrc: editingCard.shortSrc,
+            url:  "https://youtu.be/"+editingCard.shortSrc,
+            src: "https://www.youtube-nocookie.com/embed/"+editingCard.shortSrc,
+            favorite: boolean
+          })
         })
-      })
-      const data = await res.json()
-      this.favoritesMusic = [...this.favoritesMusic, data]
-      alert("Add this card to your favorites !")
+        const data = await res.json()
+        this.musicData = this.musicData.map(card => 
+        card.id === editingCard.id ?
+        {...card,
+                  id: data.id,
+                  name: data.name, 
+                  artist: data.artist, 
+                  shortSrc: data.shortSrc, 
+                  url: data.url,
+                  src: data.src,
+                  favorite: data.favorite
+        } : card)
+        if (this.editingState == true){
+        alert("Your Editing has been complete !")
+        }
+        // console.log(data)
+        this.editingState = false
+        this.editingCard = null
       }
-      
       catch(error){
-        console.log(`Could not add! ${error}`)
-      }
-    },
-
-    async deleteFavorite(cardId){
-      try{
-        await fetch(`${this.FavoritesUrl}/${cardId}`,{
-          method: 'DELETE'
-        })
-        this.favoritesMusic = this.favoritesMusic.filter(card=>card.id !== cardId)
-        alert("Unfavorite Succeed !")
-      }
-      catch(error){
-        console.log(`Could not delete! ${error}`)
+        console.log(`Could not edit! ${error}`)
       }
     },
 
@@ -162,17 +155,19 @@ export default {
           'content-type': 'application/json'
         },
         body: JSON.stringify({
-          id: this.musicData.length + 1,
+          id: this.findMissingID(),
           name: newCard.name,
           artist: newCard.artist,
-          shortSrc: newCard.src,
-          url: "https://youtu.be/" + newCard.src,
-          src: "https://www.youtube-nocookie.com/embed/" + newCard.src
+          shortSrc: newCard.shortSrc,
+          url: "https://youtu.be/" + newCard.shortSrc,
+          src: "https://www.youtube-nocookie.com/embed/" + newCard.shortSrc,
+          favorite: false
         })
       })
       const data = await res.json()
       this.musicData = [...this.musicData, data]
       alert("Add card succeed !")
+      location.reload();
       }
       }
       catch(error){
@@ -191,46 +186,23 @@ export default {
         console.log(`Could not delete! ${error}`)
       }
     },
-    async editMusicCard(editingCard){
-      try{
-        const res = await fetch(`${this.url}/${editingCard.id}`,{
-          method: 'PUT',
-          headers:{
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify({
-            id: editingCard.id,
-            name: editingCard.name,
-            artist: editingCard.artist,
-            shortSrc: editingCard.src,
-            url: "https://youtu.be/" + editingCard.src,
-            src: "https://www.youtube-nocookie.com/embed/" + editingCard.src
-          })
-        })
-        const data = await res.json()
-        this.musicData = this.musicData.map(card => 
-        card.id === editingCard.id ?
-        {...card,
-                  name: data.name, 
-                  artist: data.artist, 
-                  shortSrc: data.shortSrc, 
-                  url: data.url,
-                  src: data.src} : card)
-        alert("Your Editing has been complete !")
-        console.log(data)
-        this.editingState = false
-        this.editingCard = null
-        // this.editId = ''
-        // this.enteredName = ''
-        // this.rating = ''
-      }
-      catch(error){
-        console.log(`Could not edit! ${error}`)
-      }
-    },
+
     jumpToEditZone(){
       var go = document.getElementById("editZone");
       go.scrollIntoView();
+    },
+
+    findMissingID(){
+      let i;
+      var missingID;
+      for (i=0; i<this.musicData.length;i++){
+        if(i+1 != this.musicData[i].id){
+          // console.log(i)
+          missingID = i+1
+          // console.log(missingID)
+          return missingID
+        }
+      }
     }
 
   },
@@ -260,7 +232,13 @@ export default {
   },
   async created(){
       this.musicData = await this.getMusicData(this.url);
-      this.favoritesMusic = await this.getMusicData(this.FavoritesUrl);
+      this.musicData = this.musicData.sort((a, b) => (a.id > b.id) ? 1 : -1)
+      // let i;
+      // for (i=0; i<this.musicData.length; i++){
+      //   console.log(this.musicData[i].id)
+      // }
+      // this.favoritesMusic = await this.getMusicData(this.FavoritesUrl);
+      // this.favoritesMusic = this.favoritesMusic.sort((a, b) => (a.id > b.id) ? 1 : -1)
     },
 }
 </script>
